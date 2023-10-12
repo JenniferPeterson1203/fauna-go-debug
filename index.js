@@ -3,8 +3,8 @@ const create = require("./src/animalController");
 const animals = readJSONFile("./data", "animals.js");
 
 const inform = console.log;
-
-function run( {
+//add closing parenthesis to the function
+function run() {
   const action = process.argv[2];
   const animal = process.argv[3];
 
