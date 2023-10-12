@@ -11,3 +11,6 @@ function create(animals, animalName) {
   animals.push(animal);
   return animals;
 }
+
+//exporting the create function
+module.exports = { create };
