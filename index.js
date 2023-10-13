@@ -1,6 +1,15 @@
-const create = require("./src/animalController");
+const { readJSONFile, writeJSONFile } = require("./src/helpers");
 
-const animals = readJSONFile("./data", "animals.js");
+const {
+  create,
+  index,
+  show,
+  destroy,
+  edit,
+  score,
+} = require("./src/animalController");
+
+const animals = readJSONFile("./data", "animals.json");
 
 const inform = console.log;
 //add closing parenthesis to the function
@@ -13,23 +22,30 @@ function run() {
 
   switch (action) {
     case "index":
-      inform(action, animals);
+      const animalsView = index(animals);
+      inform(animalsView);
       break;
     case "create":
       updatedAnimals = create(animals, animal);
       writeToFile = true;
       break;
     case "show":
-      inform(action, animal);
+      const animalView = show(animals, animal);
+      inform(animalView);
       break;
     case "update":
-      inform(action, animal);
+      updatedAnimals = edit(animals, animal, process.argv[4]);
+      writeToFile = true;
       break;
     case "destroy":
-      inform(action, animal);
+      updatedAnimals = destroy(animals, animal);
+      writeToFile = true;
       break;
     case "score":
-      inform(action);
+      inform(
+        `Current points sum of all animals you've added to your database is`,
+        score(animals)
+      );
       break;
     default:
       inform("There was an error.");
